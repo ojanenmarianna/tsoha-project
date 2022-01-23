@@ -3,7 +3,7 @@
 
 Sovelluksessa näkyy tallennetut treenit vuosittain ja vuosien sisältä löytyy tallennetut treenit aikajärjestyksessä. Käyttäjä näkee omat ja toisten tallentamat treenit ja voi lisätä kommentteja niihin. Jokainen käyttäjä on peruskäyttäjä tai ylläpitäjä. 
 
-ovelluksen ominaisuuksia:
+Sovelluksen ominaisuuksia:
 
 - Käyttäjä pystyy kirjautumaan sisään ja ulos, sekä luomaan uuden tunnuksen 
 - Peruskäyttäjä pystyy luomaan ja tallentamaan uuden treenin, sekä pystyy muokkaamaan treenin sisältöä myöhemmin ja poistamaan sen. 
