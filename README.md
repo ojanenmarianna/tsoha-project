@@ -14,3 +14,4 @@ Sovelluksessa näkyy tallennetut treenit vuosittain ja vuosien sisältä löytyy
 - Käyttäjä voi kommentoida muiden tallentamia treenejä sekä omiaan. 
 - Ylläpitäjä pystyy poistamaan kenen vaan kommentin/ tallennetun treenin ja siihen liittyvät kommentit
 
+Sovellus on testattavissa [Herokussa](https://tsoha-project.herokuapp.com).
