@@ -8,4 +8,4 @@ CREATE TABLE users (
     name TEXT,
     password TEXT,
     role INTEGER
-):
+);
