@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Lisää uusi harjoitus</h2>
+
+<form action="/add" method="post">
+    Laji: <br><input type="text" name="name" minlength="1" maxlength="20">
+    <p>
+    Kesto minuutteina:<br><input type="number" time="time">
+    <p>
+    Intensiteetti:
+    <select name="intensity">
+        <option value=1> matala
+        <option value=2> keskivaikea
+        <option value=3> korkea
+    </select>
+    <p>
+    <input type="submit" value="Lisää harjoitus">
+</form>
+
+<p>
+<a href="/">Palaa takaisin</a>
+{% endblock %}

@@ -1,6 +1,34 @@
 from app import app
 from flask import render_template, request, redirect
 import users
+import exercises
+
+#Add exercise
+@app.route("/add", methods=["get", "post"])
+def add_exercise():
+    if request.method == "GET":
+        return render_template("add.html")
+    
+    if request.method == "POST":
+        users.check_csrf()
+        creator_id = users.user_id()
+
+        name = request.form["name"]
+        if len(name) < 1 or len(name) > 20:
+            return render_template("error.html", message="Nimessä tulee olla 1-20 merkkiä")
+
+        time = request.form["time"]
+        if time < 1:
+            return render_template("error.html", message="Keston tulee olla vähintään 1 minuutti")
+
+        intensity = request.form["intensity"]
+        if intensity not in ("1", "2", "3"):
+            return render_template("error.html", message="Tuntematon intensiteetti")
+        
+        if not exercises.add_exercise(name, time, intensity, creator_id):
+            return render_template("error.html", message="Harjoitusta ei lisätty")
+        return redirect("/frontpage")
+        
 
 #Login page
 @app.route("/", methods=["get", "post"])
