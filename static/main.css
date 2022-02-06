@@ -1,0 +1,66 @@
+body {
+	margin: auto;
+	max-width: 45em;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	background: lightblue;
+}
+
+nav li {
+	display: inline-block;
+	padding: .7em 1em .5em;
+	background: silver;
+	border-radius: .5em;
+	margin: .2em;
+}
+
+.header {
+	background: rgb(245, 208, 214);
+	font-weight: bold;
+	padding: 2em 1em;
+	font-size: 2em;
+	border-radius: .5em;
+	margin-top: .5em;
+}
+
+form {
+	
+	background: rgb(226, 220, 220);
+	border-radius: .5em;
+	max-width: 20em;
+	display: grid;
+	grid-template-columns: 8em 10em;
+	grid-row-gap: .5em;
+	margin-bottom: 5em;
+	margin-left: 5em;
+}
+
+form #button:hover{
+    background: rgb(211, 198, 181);
+    color: white;
+}
+
+
+nav ul {
+    padding: 0;
+    margin: .5em;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.content {
+   background: rgb(241, 210, 210);
+   padding: 1.5em 2em;
+   border-radius: .5em
+}
+
+nav li a {
+    text-decoration: none;
+    color: #000;
+}
+
+nav li:hover {
+    background-color: rgb(226, 226, 226);
+}

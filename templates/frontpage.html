@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<body>
+  <div class="header">
+	<h1>Testi appi</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Vuosi 2022</a</li>
+    </ul>
+  </nav>
+
+  <div class="content">
+  <h2>Tallennettujen treenien määrä: {{ count }}
+    <hr>
+      {% for message in messages %}
+      {{ message.content }}
+    <hr>
+      {% endfor %}
+    <a href="/">Lisää kommentti</a></h2>
+    <a href="/logout">Kirjaudu ulos</a> 
+  </div>
+{% endblock %}
