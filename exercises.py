@@ -18,7 +18,13 @@ def add_exercise(name, time, intensity, creator_id):
     return True
 
 def get_exercise_info(exercise_id):
-    sql = """SELECT e.name, u.name FROM exercises e, users u
+    sql = """SELECT e.name, e.time, e.intensity, u.name FROM exercises e, users u
             WHERE e.id = :exercise_id AND e.creator_id = u.id"""
     return db.session.execute(sql, {"exercise_id": exercise_id}).fetchone()
 
+def add_comment(exercise_id, user_id, comment):
+    sql = """INSERT INTO comments (exercise_id, user_id, sent_at, comment)
+        VALUES (:exercise_id, :user_id, NOW(), :comment)"""
+    db.session.execute(sql, {"exercise_id":exercise_id, "user_id":user_id,
+                            "comment":comment})
+    db.session.commit()

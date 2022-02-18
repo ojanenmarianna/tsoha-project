@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Harjoitus {{ name }}</h2>
+<h2>Harjoitus: {{ name }}</h2>
 
 <ul>
     <li> Harjoituksen tallentanut: {{ creator }}
+    <li> Kesto: {{ time }}
+    <li> Intensiteetti: {{ intensity }}
     <li> Kommenttien lukumäärä:  {{ comments }}
 </ul>
 
@@ -13,6 +15,7 @@
 <textarea name="comment" rows="3" cols="40" maxlength="1000"></textarea>
 <p><input type="submit" value="Lähetä">
 <input type="hidden" name="exercise_id" value="{{ id }}">
+<input type="hidden" name="user_id" value="{{ user_id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 

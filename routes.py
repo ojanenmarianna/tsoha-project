@@ -6,11 +6,13 @@ import exercises
 #Add exercise
 @app.route("/add", methods=["get", "post"])
 def add_exercise():
+    users.require_role(1 or 2)
     if request.method == "GET":
         return render_template("add.html")
     
     if request.method == "POST":
-        #users.check_csrf()
+        users.check_csrf()
+
         creator_id = users.user_id()
 
         name = request.form["name"]
@@ -47,17 +49,27 @@ def index():
 @app.route("/exercise/<int:exercise_id>")
 def show_exercise(exercise_id):
     info = exercises.get_exercise_info(exercise_id)
-
     #todo get comment for exercise
 
-    return render_template("exercise.html", id=exercise_id, name=info[0], creator=info[1])
+    return render_template("exercise.html", id=exercise_id, name=info[0], creator=info[3], time=info[1], intensity=info[2])
 
+#Add comment to exercise
+@app.route("/comment", methods=["post"])
+def comment():
+
+    exercise_id = request.form["exercise_id"]
+    comment = request.form["comment"]
+
+    exercises.add_comment(exercise_id, users.user_id(), comment)
+    
+    return redirect("/exercise/"+str(exercise_id))
 
 #Home page
 @app.route("/frontpage")
 def frontpage():
     all_exercises = exercises.get_all_exercises()
-    return render_template("frontpage.html", count=len(all_exercises), exercises=all_exercises)
+    my_exercises = exercises.get_my_exercises(users.user_id())
+    return render_template("frontpage.html", count=len(all_exercises), exercises=all_exercises, my_count=len(my_exercises), my_exercises=my_exercises)
 
 #Register page
 @app.route("/register", methods=["get", "post"])
@@ -83,7 +95,7 @@ def register():
 
         if not users.register(username, password1, role):
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
-        return redirect("/frontpage")
+        return redirect("/")
 
 #Logout
 @app.route("/logout")
