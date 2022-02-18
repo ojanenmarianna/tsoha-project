@@ -10,15 +10,15 @@ def add_exercise():
         return render_template("add.html")
     
     if request.method == "POST":
-        users.check_csrf()
+        #users.check_csrf()
         creator_id = users.user_id()
 
         name = request.form["name"]
         if len(name) < 1 or len(name) > 20:
-            return render_template("error.html", message="Nimessä tulee olla 1-20 merkkiä")
+            return render_template("error.html", message="Harjoituksen nimessä tulee olla 1-20 merkkiä")
 
         time = request.form["time"]
-        if time < 1:
+        if int(time) < 1:
             return render_template("error.html", message="Keston tulee olla vähintään 1 minuutti")
 
         intensity = request.form["intensity"]
@@ -43,10 +43,21 @@ def index():
             return render_template("error.html", message="Väärä tunnus tai salasana")
         return redirect("/frontpage")
 
+#Show exercise
+@app.route("/exercise/<int:exercise_id>")
+def show_exercise(exercise_id):
+    info = exercises.get_exercise_info(exercise_id)
+
+    #todo get comment for exercise
+
+    return render_template("exercise.html", id=exercise_id, name=info[0], creator=info[1])
+
+
 #Home page
 @app.route("/frontpage")
 def frontpage():
-    return render_template("frontpage.html")
+    all_exercises = exercises.get_all_exercises()
+    return render_template("frontpage.html", count=len(all_exercises), exercises=all_exercises)
 
 #Register page
 @app.route("/register", methods=["get", "post"])

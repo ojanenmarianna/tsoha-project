@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
 {% block content %}
 
 <body>
@@ -13,12 +14,15 @@
 
   <div class="content">
   <h2>Tallennettujen treenien määrä: {{ count }}
-    <hr>
-      {% for message in messages %}
-      {{ message.content }}
-    <hr>
+
+    <ul>
+      {% for exercise in exercises %}
+      <li><a href="/exercise/{{ exercise.id }}">{{ exercise.name }}</a>
       {% endfor %}
+    </ul>
+
     <a href="/add">Lisää harjoitus</a></h2>
     <a href="/logout">Kirjaudu ulos</a> 
   </div>
+
 {% endblock %}
