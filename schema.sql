@@ -25,3 +25,7 @@ CREATE TABLE comments (
     sent_at TIMESTAMP,
     comment TEXT
 );
+
+CREATE TABLE visitors (
+    id SERIAL PRIMARY KEY, 
+    time TIMESTAMP);

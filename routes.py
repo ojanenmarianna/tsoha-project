@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, redirect
 import users
 import exercises
+import visitors
 
 #Add exercise
 @app.route("/add", methods=["get", "post"])
@@ -43,6 +44,7 @@ def index():
 
         if not users.login(username, password):
             return render_template("error.html", message="Väärä tunnus tai salasana")
+        visitors.add_visit()
         return redirect("/frontpage")
 
 #Show exercise
@@ -69,7 +71,8 @@ def comment():
 def frontpage():
     all_exercises = exercises.get_all_exercises()
     my_exercises = exercises.get_my_exercises(users.user_id())
-    return render_template("frontpage.html", count=len(all_exercises), exercises=all_exercises, my_count=len(my_exercises), my_exercises=my_exercises)
+    visits = visitors.count_visits()
+    return render_template("frontpage.html", count=len(all_exercises), exercises=all_exercises, my_count=len(my_exercises), my_exercises=my_exercises, counter=visits)
 
 #Register page
 @app.route("/register", methods=["get", "post"])
