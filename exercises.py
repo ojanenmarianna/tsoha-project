@@ -9,7 +9,6 @@ def get_my_exercises(user_id):
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def add_exercise(name, time, intensity, creator_id):
-    #todo add exercise for user
     sql = """INSERT INTO exercises (name, intensity, time, creator_id)
             VALUES (:name, :intensity, :time, :creator_id)"""
     db.session.execute(sql, {"name": name, "intensity": intensity, "time": time, "creator_id": creator_id})
@@ -20,7 +19,13 @@ def add_exercise(name, time, intensity, creator_id):
 def get_exercise_info(exercise_id):
     sql = """SELECT e.name, e.time, e.intensity, u.name FROM exercises e, users u
             WHERE e.id = :exercise_id AND e.creator_id = u.id"""
-    return db.session.execute(sql, {"exercise_id": exercise_id}).fetchone()
+    return db.session.execute(sql, {"exercise_id":exercise_id}).fetchone()
+
+def get_exercise_comments(exercise_id):
+    sql = """SELECT u.name, c.comment FROM users u, comments c
+            WHERE c.user_id = u.id AND c.exercise_id = :exercise_id ORDER BY c.id"""
+
+    return db.session.execute(sql, {"exercise_id":exercise_id}).fetchall()
 
 def add_comment(exercise_id, user_id, comment):
     sql = """INSERT INTO comments (exercise_id, user_id, sent_at, comment)

@@ -51,9 +51,9 @@ def index():
 @app.route("/exercise/<int:exercise_id>")
 def show_exercise(exercise_id):
     info = exercises.get_exercise_info(exercise_id)
-    #todo get comment for exercise
+    comment_list = exercises.get_exercise_comments(exercise_id)
 
-    return render_template("exercise.html", id=exercise_id, name=info[0], creator=info[3], time=info[1], intensity=info[2])
+    return render_template("exercise.html", id=exercise_id, name=info[0], creator=info[3], time=info[1], intensity=info[2], comment_list=comment_list, count=len(comment_list))
 
 #Add comment to exercise
 @app.route("/comment", methods=["post"])

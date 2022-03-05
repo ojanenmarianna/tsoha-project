@@ -5,9 +5,15 @@
 
 <ul>
     <li> Harjoituksen tallentanut: {{ creator }}
-    <li> Kesto: {{ time }}
+    <li> Kesto: {{ time }} minuuttia
     <li> Intensiteetti: {{ intensity }}
-    <li> Kommenttien lukumäärä:  {{ comments }}
+</ul>
+
+<h2>Kommenttien määrä:  {{ count }}</h2> 
+<ul>
+    {% for comment in comment_list %}
+    <li> {{ comment[0] }}: {{ comment[1] }}
+    {% endfor %}
 </ul>
 
 <h3>Lisää kommentti</h3>
