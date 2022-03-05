@@ -5,14 +5,6 @@ body {
 	background: azure;
 }
 
-nav li {
-	display: inline-block;
-	padding: .7em 1em .5em;
-	background: silver;
-	border-radius: .5em;
-	margin: .2em;
-}
-
 .header {
 	background: rgb(181, 211, 211);
 	font-weight: bold;
@@ -51,7 +43,7 @@ h2 {
 }
 
 .content {
-   background:rgb(181, 211, 211);
+   background:rgb(240, 247, 247);
    padding: 1.5em 2em;
    border-radius: .5em
 }

@@ -4,18 +4,14 @@
 <h2>Lisää harjoitus</h2>
 
 <form action="/add" method="post">
-    Harjoituksen nimi/laji: <br><input type="text" name="name" minlength="1" maxlength="20">
-    <p>
-    Kesto minuutteina: <br><input type="number" name="time">
-    <p>
+    Harjoituksen nimi/laji: <input type="text" name="name" minlength="1" maxlength="20">
+    Kesto minuutteina: <input type="number" name="time">
     Intensiteetti:
-    <p>
     <select name="intensity">
         <option value=1> matala
         <option value=2> keskivaikea
         <option value=3> korkea
     </select>
-    <p>
     <input type="submit" value="Lisää harjoitus">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
 </form>
