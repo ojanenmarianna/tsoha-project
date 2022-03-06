@@ -3,6 +3,10 @@
 
 Sovellus listaa kaikkien käyttäjien tallentamat treenit sekä käyttäjän itse tallentamat treenit. Käyttäjä näkee omat ja toisten tallentamat treenit ja voi lisätä kommentteja niihin. Jokainen käyttäjä on peruskäyttäjä tai ylläpitäjä. Sovellus laskee sivun vierailijat.
 
+Sovelluksen testausta varten on luotu kaksi testikäyttäjään:
+- Peruskäyttäjä: test, salasana: testpassword1
+- Ylläpitäjä: testadmin, salasana testpassword2
+
 ## Toteutetut ominaisuudet:
 
 - Käyttäjä pystyy kirjautumaan sisään ja ulos, sekä luomaan uuden tunnuksen
