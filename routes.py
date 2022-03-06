@@ -1,3 +1,4 @@
+from crypt import methods
 from app import app
 from flask import render_template, request, redirect
 import users
@@ -30,6 +31,7 @@ def add_exercise():
         
         if not exercises.add_exercise(name, time, intensity, creator_id):
             return render_template("error.html", message="Harjoitusta ei lisätty")
+        
         return redirect("/frontpage")
         
 
@@ -105,3 +107,50 @@ def register():
 def logout():
     users.logout()
     return redirect("/")
+
+#Remove exercise
+@app.route("/remove", methods=["get", "post"])
+def remove_exercise():
+    users.require_role(1 or 2)
+
+    if request.method == "GET" and users.user_role() == 1:
+        my_exercises = exercises.get_my_exercises(users.user_id())
+        return render_template("remove.html", list=my_exercises)
+
+    if request.method == "GET" and users.user_role() == 2:
+        all_exercises = exercises.get_all_exercises()
+        return render_template("remove.html", list=all_exercises)
+
+    if request.method == "POST":
+        users.check_csrf()
+
+        if "exercise" in request.form:
+            exercise = request.form["exercise"]
+            exercises.remove_exercise(exercise)
+            return redirect("/frontpage")
+
+        return render_template("error.html", message="Treenin poistaminen ei onnistunut")
+
+#Show summary of users
+@app.route("/summary", methods=["get", "post"])
+def show_summary():
+    users.require_role(2)
+
+    if request.method == "GET":
+        all_users = users.get_all_users()
+        return render_template("summary.html", list=all_users)
+
+    if request.method == "POST":
+        users.check_csrf()
+
+        if "user" in request.form:
+            user = request.form["user"]
+            
+            users_exercises = exercises.get_my_exercises(user)
+            for exercise in users_exercises:
+                exercises.remove_exercise(exercise[0])
+
+            users.remove_user(user)
+            return redirect("/frontpage")
+
+        return render_template("error.html", message="Käyttäjän poistaminen ei onnistunut")

@@ -28,8 +28,8 @@ def logout():
 def register(name, password, role):
     hash_value = generate_password_hash(password)
     try:
-        sql = """INSERT INTO users (name, password, role)
-                 VALUES (:name, :password, :role)"""
+        sql = """INSERT INTO users (name, password, role, visible)
+                 VALUES (:name, :password, :role, true)"""
         db.session.execute(sql, {"name":name, "password":hash_value, "role":role})
         db.session.commit()
     except:
@@ -39,6 +39,9 @@ def register(name, password, role):
 def user_id():
     return session.get("user_id", 0)
 
+def user_role():
+    return session.get("user_role", 0)
+
 def require_role(role):
     if role > session.get("user_role", 0):
         abort(403)
@@ -46,3 +49,12 @@ def require_role(role):
 def check_csrf():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
+
+def get_all_users():
+    sql = "SELECT id, name FROM users WHERE visible=true ORDER BY name"
+    return db.session.execute(sql).fetchall()
+
+def remove_user(user_id):
+    sql = "UPDATE users SET VISIBLE=false WHERE id =:user_id"
+    db.session.execute(sql, {"user_id":user_id})
+    db.session.commit()

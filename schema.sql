@@ -5,9 +5,10 @@ CREATE TABLE visitors (
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    name TEXT UNIQUE,
     password TEXT,
-    role INTEGER
+    role INTEGER,
+    visible BOOLEAN
 );
 
 CREATE TABLE exercises (
@@ -15,7 +16,8 @@ CREATE TABLE exercises (
     name TEXT,
     intensity INTEGER,
     time INTEGER,
-    creator_id INTEGER REFERENCES users
+    creator_id INTEGER, 
+    visible BOOLEAN
 );
 
 CREATE TABLE comments (
@@ -24,5 +26,10 @@ CREATE TABLE comments (
     user_id INTEGER REFERENCES users,
     sent_at TIMESTAMP,
     comment TEXT
+);
+
+CREATE TABLE summary (
+    user_id INTEGER REFERENCES users,
+    exercise_id INTEGER REFERENCES exercises
 );
 

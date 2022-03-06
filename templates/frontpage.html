@@ -8,20 +8,23 @@
   </div>
   <nav>
     <ul>
-      <h3> Tervetuloa! Olet sivun {{ counter }}. käyttäjä.</h3>
+      <li><a href="/remove">Poista harjoitus</a></li>
+      {% if session.user_role == 2 %}
+      <li><a href="/summary">Hallitse käyttäjiä</a></li>
+      {% endif %}
     </ul>
   </nav>
 
   <div class="content">
-  
-  <h2>Tallennettujen treenien määrä: {{ count }}</h2>
+  <h2> Tervetuloa! Olet sivun {{ counter }}. käyttäjä.</h2>
+  <h3>Tallennettujen treenien määrä: {{ count }}</h3>
     <ul>
       {% for exercise in exercises %}
       <li><a href="/exercise/{{ exercise.id }}">{{ exercise.name }}</a>
       {% endfor %}
     </ul>
 
-  <h2>Omat treenit: {{ my_count }}</h2>
+  <h3>Omat treenit: {{ my_count }}</h3>
     <ul>
       {% for exercise in my_exercises %}
       <li><a href="/exercise/{{ exercise.id }}">{{ exercise.name }}</a>
@@ -31,6 +34,7 @@
     <a href="/add">Lisää harjoitus</a>
     <p>
     <a href="/logout">Kirjaudu ulos</a> 
+
   </div>
 
 {% endblock %}
