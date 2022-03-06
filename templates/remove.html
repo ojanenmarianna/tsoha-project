@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Poista harjoitus</h2>
+<h3>Minkä treenin haluat poistaa?</h3>
+<form action="/remove" method="post">
+    
+    {% for exercise in list %}
+    <input type="radio" name="exercise" value="{{ exercise.id }}"> {{ exercise.name }}
+    {% endfor %}
+
+    <input type="submit" value="Poista">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+<p>
+<a href=/frontpage>Palaa takaisin</a>
+
+{% endblock %}

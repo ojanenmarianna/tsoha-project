@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content">
+<h2>Hallitse käyttäjiä</h2>
+
+<form action="/summary" method="post">   
+    {% for user in list %}
+    <input type="radio" name="user" value="{{ user.id }}"> {{ user.name }}
+    {% endfor %}
+    <input type="submit" value="Poista">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+<p>
+<a href=/frontpage>Palaa takaisin</a>
+
+</div>
+
+{% endblock %}
